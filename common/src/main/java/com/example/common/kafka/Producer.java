@@ -34,7 +34,6 @@ public class Producer {
     private final boolean enableIdempotency;
     private final int numRecords;
     private final int transactionTimeoutMs;
-    private volatile boolean closed;
 
     public Producer(
             String bootstrapServers,

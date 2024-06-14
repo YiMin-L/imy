@@ -88,6 +88,9 @@ public class DispatcherHandler extends ChannelInboundHandlerAdapter {
                 channel.writeAndFlush(response.getByteBuf());
 
                 log.info("DispatcherHandler 返回响应给TCP接入系统： + authenticateResponse");
+            }else if(Objects.equals(messageType, MessageType.TEXT_MSG.getValue())){
+                requestHandler.sendMessage(channel,request);
+
             }
         }
 

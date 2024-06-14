@@ -4,6 +4,7 @@ import com.example.common.constants.Constants;
 import com.example.common.enums.MessageType;
 import com.example.common.netty.Request;
 import com.lym.protobuf.AuthenticateRequestProto;
+import com.lym.protobuf.MessageSendRequestProto;
 import io.netty.channel.socket.SocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +32,23 @@ public class DispatcherInstance {
                 authenticateRequestBytes.length,
                 authenticateRequestBytes
         );
-        log.info("DispatcherInstance authenticate {}",socketChannel.id());
+        log.info("DispatcherInstance authenticate {}", socketChannel.id());
         socketChannel.writeAndFlush(request.getByteBuf());
+    }
+
+
+    public void sendMessage(MessageSendRequestProto.MessageSendRequest messageSendRequest) {
+
+        Request request = new Request(
+                Constants.request_header_length,
+                Constants.app_sdk_version,
+                MessageType.AUTH.getValue(),
+                Constants.request_sequence_default,
+                messageSendRequest.toByteArray().length,
+                messageSendRequest.toByteArray()
+        );
+
+        socketChannel.writeAndFlush(request.getByteBuf());
+
     }
 }

@@ -3,10 +3,12 @@ package com.example.common.netty;
 import com.example.common.constants.Constants;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Data
+@Builder
 @Slf4j
 public class Message {
     /**
@@ -97,5 +99,11 @@ public class Message {
         byteBuf.writeBytes(body);
     }
 
+    public Request toRequest() {
+        return new Request(headerLength, appSdkVersion, messageType, sequence, bodyLength, body);
+    }
 
+    public Response toResponse() {
+        return new Response(headerLength, appSdkVersion, messageType, sequence, bodyLength, body);
+    }
 }

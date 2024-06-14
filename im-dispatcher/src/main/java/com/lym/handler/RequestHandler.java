@@ -1,9 +1,17 @@
 package com.lym.handler;
 
 
+import com.example.common.kafka.Producer;
+import com.example.common.netty.Message;
+import com.example.common.netty.Request;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.lym.protobuf.AuthenticateRequestProto;
 import com.lym.protobuf.AuthenticateResponseProto;
+import com.lym.protobuf.MessageSendRequestProto;
+import io.netty.channel.socket.SocketChannel;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.example.common.constants.Constants.channelIdFunc;
 
 @Slf4j
 public class RequestHandler {
@@ -39,4 +47,12 @@ public class RequestHandler {
 
     }
 
+    public void sendMessage(SocketChannel channel, Message message) throws InvalidProtocolBufferException {
+        String channelId = channelIdFunc.apply(channel);
+        Request request = message.toRequest();
+        MessageSendRequestProto.MessageSendRequest messageSendRequest =
+                MessageSendRequestProto.MessageSendRequest.parseFrom(request.getBody());
+
+//        Producer producer = new Producer()
+    }
 }

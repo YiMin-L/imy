@@ -20,6 +20,9 @@ public class Response extends Message {
         );
     }
 
+    public Response(int headerLength, int appSdkVersion, int messageType, int sequence, int bodyLength, byte[] body) {
+        super(headerLength, appSdkVersion, messageType, sequence, RequestType.RESPONSE.getVal(), bodyLength, body);
+    }
 
     public Response(ByteBuf byteBuf) {
         super(byteBuf);

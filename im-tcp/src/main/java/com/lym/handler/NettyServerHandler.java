@@ -7,6 +7,7 @@ import com.example.common.netty.Message;
 import com.example.common.netty.Request;
 import com.lym.context.SessionManager;
 import com.lym.protobuf.AuthenticateRequestProto;
+import com.lym.protobuf.MessageSendRequestProto;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -48,7 +49,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 //            }
             }
             if (Objects.equals(messageType, MessageType.TEXT_MSG)) {// 普通消息
-                System.out.println(new String(body));
+                MessageSendRequestProto.MessageSendRequest messageSendRequest =
+                        MessageSendRequestProto.MessageSendRequest.parseFrom(body);
+                requestHandler.sendMessage(messageSendRequest);
+                log.info("收到客户端消息 {}", messageSendRequest.getContent());
+
             }
         }
 
