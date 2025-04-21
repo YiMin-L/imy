@@ -42,7 +42,7 @@ public class DispatcherInstance {
         Request request = new Request(
                 Constants.request_header_length,
                 Constants.app_sdk_version,
-                MessageType.AUTH.getValue(),
+                MessageType.TEXT_MSG.getValue(),
                 Constants.request_sequence_default,
                 messageSendRequest.toByteArray().length,
                 messageSendRequest.toByteArray()

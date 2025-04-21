@@ -9,8 +9,8 @@ public interface Constants {
     /* message*/
 
     // headerLength是int类型，4个字节
-    int headLengthLength = 4;
-    int bodyLengthLength = 4;
+    int head_length_length = 4;
+    int body_length_length = 4;
     /**
      * 消息头的总长度
      */
@@ -29,7 +29,10 @@ public interface Constants {
      */
     int request_sequence_default = 1;
 
-    int auth_status_success = 200;
+    int AUTH_STATUS_SUCCESS = 200;
+
+    int message_type_single = 1;
+    int message_type_group = 2;
 
 
     Function<SocketChannel, String> channelIdFunc = (socketChannel) -> String.format("%s:%s", socketChannel.remoteAddress().getHostName(), socketChannel.remoteAddress().getPort());

@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
-import static com.example.common.constants.Constants.auth_status_success;
+import static com.example.common.constants.Constants.AUTH_STATUS_SUCCESS;
 import static com.example.common.constants.Constants.channelIdFunc;
 
 @Slf4j
@@ -73,7 +73,7 @@ public class DispatcherHandler extends ChannelInboundHandlerAdapter {
                 AuthenticateResponseProto.AuthenticateResponse authenticateResponse = requestHandler.authenticate(authenticateRequest);
 
                 // 认证成功
-                if (auth_status_success == authenticateResponse.getStatus()) {
+                if (AUTH_STATUS_SUCCESS == authenticateResponse.getStatus()) {
                     AuthRedisValue v = new AuthRedisValue();
                     v.setToken(authenticateResponse.getToke());
                     v.setGatewayChannelId(channelIdFunc.apply(channel));

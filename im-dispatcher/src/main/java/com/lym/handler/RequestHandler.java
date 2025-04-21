@@ -1,7 +1,8 @@
 package com.lym.handler;
 
 
-import com.example.common.kafka.Producer;
+import com.alibaba.fastjson2.JSONObject;
+import com.example.common.constants.Constants;
 import com.example.common.netty.Message;
 import com.example.common.netty.Request;
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -53,6 +54,14 @@ public class RequestHandler {
         MessageSendRequestProto.MessageSendRequest messageSendRequest =
                 MessageSendRequestProto.MessageSendRequest.parseFrom(request.getBody());
 
-//        Producer producer = new Producer()
+        JSONObject json = new JSONObject();
+        json.put("senderId", messageSendRequest.getSenderId());
+        json.put("receiverId", messageSendRequest.getReceiverId());
+        json.put("content", messageSendRequest.getContent());
+        json.put("requestType", Constants.message_type_single);
+        json.put("sequence", message.getSequence());
+        json.put("gatewayChannelId", channelId);
+
+
     }
 }

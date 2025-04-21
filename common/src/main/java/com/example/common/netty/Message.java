@@ -3,12 +3,10 @@ package com.example.common.netty;
 import com.example.common.constants.Constants;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Data
-@Builder
 @Slf4j
 public class Message {
     /**
@@ -89,7 +87,7 @@ public class Message {
         this.body = body;
 
         // 写进byteBuf
-        this.byteBuf = Unpooled.buffer(Constants.headLengthLength + headerLength + Constants.bodyLengthLength + bodyLength);
+        this.byteBuf = Unpooled.buffer(Constants.head_length_length + headerLength + Constants.body_length_length + bodyLength);
         byteBuf.writeInt(headerLength);
         byteBuf.writeInt(appSdkVersion);
         byteBuf.writeInt(messageType);
